@@ -1,0 +1,28 @@
+{
+  "name": "chrome-getifamesrc",
+  "version": "1.0.0",
+  "description": "A chrome extension that get current page's iframe src",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rimraf dist && rollup --config --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YellRes/chrome-getIfameSrc.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YellRes/chrome-getIfameSrc/issues"
+  },
+  "homepage": "https://github.com/YellRes/chrome-getIfameSrc#readme",
+  "devDependencies": {
+    "@rollup/plugin-html": "^1.0.2",
+    "rimraf": "^5.0.1",
+    "rollup": "^3.27.0",
+    "rollup-plugin-copy": "^3.4.0",
+    "rollup-plugin-zip": "^1.0.3"
+  }
+}
