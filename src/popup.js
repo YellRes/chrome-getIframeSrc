@@ -1,18 +1,19 @@
+let iframeArr = [];
+
 let handleEvent = () => {
   let refreshDom = document.querySelector("#refreshDom");
 
   refreshDom.addEventListener(
     "click",
     () => {
-      chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+      chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         const currentTabId = tabs[0].id;
-        chrome.scripting.executeScript(
-          'document.querySelectorAll("iframe")',
-          (result) => {
-            const iframeCount = result;
-            console.log(result);
-          }
-        );
+        // 当前tab发送事件
+        chrome.tabs.sendMessage(currentTabId, "", (res) => {
+          iframeArr = res;
+
+          console.log(iframeArr, "iframeArr");
+        });
       });
     },
     false
