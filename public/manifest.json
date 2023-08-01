@@ -7,5 +7,10 @@
   "action": {
     "default_popup": "popup.html"
   },
-  "permissions": ["dom"]
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*", "<all_urls>"],
+      "js": ["content.js"]
+    }
+  ]
 }

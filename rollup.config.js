@@ -4,7 +4,7 @@ const zip = require("rollup-plugin-zip");
 
 /** @type {import('rollup').RollupOptions} */
 module.exports = {
-  input: "src/popup.js",
+  input: ["src/popup.js", "src/content.js"],
   output: {
     dir: "dist",
     entryFileNames: "[name].js",
