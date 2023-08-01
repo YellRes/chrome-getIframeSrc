@@ -1,16 +1,22 @@
-export const getAllIframeSrc = () => {
-  const iframes = document.querySelectorAll("iframe");
-  const iframeSrc = [];
-  iframes.forEach((iframe) => {
-    iframeSrc.push(iframe.src);
-  });
-  return iframeSrc;
-};
-const init = () => {
-  console.log(getAllIframeSrc());
+let handleEvent = () => {
+  let refreshDom = document.querySelector("#refreshDom");
+
+  refreshDom.addEventListener(
+    "click",
+    () => {
+      chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+        const currentTabId = tabs[0].id;
+        chrome.scripting.executeScript(
+          'document.querySelectorAll("iframe")',
+          (result) => {
+            const iframeCount = result;
+            console.log(result);
+          }
+        );
+      });
+    },
+    false
+  );
 };
 
-document.addEventListener("DOMContentLoaded", () => {
-  const refreshDom = document.querySelector("#refreshDom");
-  refreshDom.addEventListener("click", init);
-});
+document.addEventListener("DOMContentLoaded", handleEvent);
