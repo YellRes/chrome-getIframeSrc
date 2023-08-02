@@ -114,6 +114,15 @@ module.exports = {
 ```
 rollup配置文件很简单，这其中我们有两个插件，第一个是拷贝`public`目录下的文件到`dist`目录下，第二个是把dist目录打包成zip压缩包。
 
+最后在`package.json`中添加启动脚本
+```json
+"scripts": {
+    "dev": "rimraf dist && rollup --config --watch"
+}
+```
+我们运行下`npm run dev`后，可以看到`dist`目录下已经生成了`popup.js`和`content.js`文件，并且`public`目录下的文件也被拷
+贝到了`dist`目录下。
+我们在chrome插件中导入`dist`目录，点开插件。打开控制台发现已经有内容输出。
 
 
 
