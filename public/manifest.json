@@ -3,9 +3,11 @@
   "description": "get iframe src in special page",
   "version": "0.1",
   "manifest_version": 3,
-
   "action": {
     "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "server.png"
   },
   "content_scripts": [
     {
