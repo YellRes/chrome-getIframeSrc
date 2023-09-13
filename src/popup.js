@@ -25,6 +25,7 @@ let handleEvent = () => {
       if (e.target.tagName === "LI") {
         let targetSrc = e.target.getAttribute("data-src");
         copy(targetSrc);
+        // 新的tab打开
       }
     },
     false
@@ -35,10 +36,20 @@ const generateDom = () => {
   let fragment = document.createDocumentFragment();
 
   for (let i = 0; i < iframeArr.length; i++) {
+    const div = document.createElement("div");
+
+    // li
     let li = document.createElement("li");
     li.textContent = iframeArr[i].name;
     li.setAttribute("data-src", iframeArr[i].src);
-    fragment.appendChild(li);
+
+    // button
+    let button = document.createElement("button");
+    button.textContent = "跳转";
+    button.setAttribute("data-src", iframeArr[i].localUrl);
+
+    div.append(...[li, button]);
+    fragment.appendChild(div);
   }
 
   document.querySelector("#container").appendChild(fragment);
