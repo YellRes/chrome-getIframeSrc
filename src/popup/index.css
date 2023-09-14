@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .btn-primary {
+        @apply bg-slate-900 disabled:opacity-50 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-6 px-3 mx-2 rounded-lg items-center justify-center sm:w-auto dark:bg-sky-500 dark:hover:bg-sky-400;
+      }
+}
