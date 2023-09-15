@@ -18,12 +18,12 @@ const { getBabelOutputPlugin } = babel;
 
 /** @type {import('rollup').RollupOptions} */
 module.exports = {
-  input: ["src/popup/popup.tsx"],
+  input: ["src/popup/popup.tsx", "src/content/content.js"],
   acornInjectPlugins: [jsx()],
   output: {
     dir: "dist",
     entryFileNames: "[name].js",
-    format: "iife",
+    format: "es",
     plugins: [
       // getBabelOutputPlugin({
       //   presets: ["@babel/preset-env"],
@@ -42,7 +42,9 @@ module.exports = {
     html({
       fileName: "popup.html",
       template: ({ attributes, files, publicPath, title }) => {
-        let scripts = [...(files.js || [])];
+        let scripts = [
+          ...(files.js || []).filter((item) => item.name === "popup"),
+        ];
         scripts = scripts
           .map(({ fileName }) => {
             const attrs = makeHtmlAttributes(attributes.script);
@@ -81,7 +83,7 @@ module.exports = {
     //   targets: ["./dist"],
     //   watch: true,
     // }),
-    terser(),
+    // terser(),
   ],
   // external: ["react"],
 };

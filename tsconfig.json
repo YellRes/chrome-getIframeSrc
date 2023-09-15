@@ -1,10 +1,12 @@
 {
     "compilerOptions": {
       "target": "es5",
+      "lib": ["dom", "dom.iterable", "esnext"],
       "module": "ESNext",
       "jsx": "react",
       "outDir": "./dist",
-      "moduleResolution": "Node"
+      "moduleResolution": "Node",
+      "types": ["@types/chrome"]
     },
     "include": ["src/**/*.tsx"],
     "exclude": ["node_modules"]
