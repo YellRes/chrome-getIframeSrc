@@ -1,7 +1,9 @@
 import { createRoot } from 'react-dom/client'
-import React, { useState } from 'react'
+import React, { useState， useEffect } from 'react'
+import { toast, ToastContainer } from 'react-toastify'
 import { copy, checkLocalServer } from '../util'
 import './index.css'
+import 'react-toastify/dist/ReactToastify.css';
 
 interface IframeItem { 
     src: string
@@ -16,8 +18,7 @@ interface IframeItemExtend extends IframeItem {
 function App() { 
     const [iframeArr, setIframeArr] = useState<Array<IframeItemExtend>>([])
 
-    const refreshAllIframe = () => { 
-
+    const refreshAllIframe = () => {
         /**
          * Q: chrome 被打包后应该被压缩了 代理里面应该不是chrome 那它是如何使用的
          * 
@@ -28,8 +29,12 @@ function App() {
             chrome.tabs.sendMessage(currentTabId, "", (res) => {
                 setIframeArr(res)
             });
-          });
+        });
+        
+       
     }
+
+    useEffect(refreshAllIframe, [])
 
     // 复制
     const copyUrl = (text: string) => copy(text)
@@ -45,24 +50,31 @@ function App() {
             iframeArr.find(item => selectedItem.src === item.src).disabled = true
             console.log(iframeArr)
             setIframeArr([...iframeArr])
+
+            toast('没有查找到本地服务器，请尝试复制链接')
         }
     }
 
-    return <div className="w-[300px] h-[400px] font-mono text-lg text-center font-semibold">
+    return <div className="w-[300px] h-[400px] p-2 font-mono text-lg text-center font-semibold">
         <div className="relative text-right pd-4">
             <span className="absolute left-[50%] translate-x-[-50%] ">iframe标签</span>
-            <button onClick={refreshAllIframe} className="text-base bg-slate-900 hover:bg-slate-700 focus:outline-none focus:ring-2 px-2.5 py-1 text-sm leading-5 rounded-full font-semibold text-white">刷新</button>
+            <button onClick={refreshAllIframe} className=" bg-slate-900 hover:bg-slate-700 focus:outline-none focus:ring-2 px-2.5 py-1 text-sm leading-5 rounded-full text-white">刷新</button>
         </div>
+
+        <div id="iframe-container" className="overflow-auto mt-1">
         {
             iframeArr.length ? iframeArr.map((item: IframeItemExtend, index) => { 
-                return <div className="iframe-item text-left mb-2" key={index}>
+                return <div className="iframe-item text-left m-2" key={index}>
                     <div className="text-sm">{item.name}
                         <button onClick={ () => toLocalServer(item)} disabled={item.disabled} className="btn-primary">跳转</button>
-                        <button onClick={() => copyUrl(item.src)}  className="btn-primary ">复制</button>
+                        <button onClick={() => copyUrl(item.src)} className="btn-primary ">复制</button>
                     </div>
                 </div>
             }): null
-        }
+            }
+        </div>
+
+        <ToastContainer  position="bottom-center" className="text-sm h-[64px]"  />
     </div>
 }
 

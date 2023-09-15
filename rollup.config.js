@@ -29,10 +29,16 @@ module.exports = {
       //   presets: ["@babel/preset-env"],
       // }),
     ],
+    // 手动拆包 react react-dom
+    manualChunks: {
+      react: ["react"],
+      "react-dom": ["react-dom"],
+    },
   },
   plugins: [
     typescript(),
     commonjs(),
+
     resolve(),
     babel({
       presets: ["@babel/preset-react"],
@@ -64,8 +70,9 @@ module.exports = {
         </html>`;
       },
     }),
+    // 替换掉react源码中的 process.env
     replace({
-      "process.env.NODE_ENV": JSON.stringify("development"),
+      "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
     }),
     copy({
       targets: [{ src: "public/**", dest: "dist/" }],
@@ -83,7 +90,7 @@ module.exports = {
     //   targets: ["./dist"],
     //   watch: true,
     // }),
-    // terser(),
+    process.env.NODE_ENV === "production" ? terser() : "",
   ],
   // external: ["react"],
 };

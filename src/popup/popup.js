@@ -54,7 +54,6 @@ const generateDom = () => {
 
   document.querySelector("#container").appendChild(fragment);
 };
-
 function copy(text) {
   let tmpTextarea = document.createElement("textarea");
   tmpTextarea.value = text;
