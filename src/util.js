@@ -7,7 +7,6 @@ export const checkLocalServer = async (localServerUrl) => {
     return Promise.reject(e);
   }
 };
-
 export function copy(text) {
   let tmpTextarea = document.createElement("textarea");
   tmpTextarea.value = text;
