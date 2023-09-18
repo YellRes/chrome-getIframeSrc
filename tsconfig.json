@@ -8,7 +8,7 @@
       "moduleResolution": "Node",
       "types": ["@types/chrome"]
     },
-    "include": ["src/**/*.tsx"],
+    "include": ["src/**/*.{tsx,ts}", "plugin/**/*.{tsx,ts}"],
     "exclude": ["node_modules"]
   }
   

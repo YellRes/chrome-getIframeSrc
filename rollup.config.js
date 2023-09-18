@@ -10,6 +10,7 @@ const babel = require("@rollup/plugin-babel");
 const html = require("@rollup/plugin-html");
 const replace = require("@rollup/plugin-replace");
 const postcss = require("rollup-plugin-postcss");
+const { generateHtmlPlugin } = require("./plugin/html.ts");
 
 const jsx = require("acorn-jsx");
 const { makeHtmlAttributes } = html;
@@ -38,38 +39,14 @@ module.exports = {
   plugins: [
     typescript(),
     commonjs(),
-
     resolve(),
     babel({
       presets: ["@babel/preset-react"],
       babelHelpers: "bundled",
       extensions: [".js", ".jsx", ".es6", ".es", ".mjs", ".ts", ".tsx"],
     }),
-    html({
-      fileName: "popup.html",
-      template: ({ attributes, files, publicPath, title }) => {
-        let scripts = [
-          ...(files.js || []).filter((item) => item.name === "popup"),
-        ];
-        scripts = scripts
-          .map(({ fileName }) => {
-            const attrs = makeHtmlAttributes(attributes.script);
-            return `<script src="${publicPath}${fileName}"${attrs}></script>`;
-          })
-          .join("\n");
-        return `<!DOCTYPE html>
-        <html>
-          <head>
-            <meta charset="UTF-8" />
-            <title>${title}</title>
-          </head>
-          <body>
-            <div id="app"></div>
-            ${scripts}
-          </body>
-        </html>`;
-      },
-    }),
+    generateHtmlPlugin("popup"),
+    generateHtmlPlugin("options"),
     // 替换掉react源码中的 process.env
     replace({
       "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),

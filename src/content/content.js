@@ -1,3 +1,6 @@
+/**
+ * TODO: 做成配置页面
+ */
 const TEST_BOSS_VIEW = "http://101.37.228.6:88";
 const PRD_BOSS_VIEW = "https://sso-boss-extend.greatld.com";
 const TEST_BOSS_VIEW_V3 = "http://101.37.228.6:96";
