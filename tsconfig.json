@@ -6,9 +6,8 @@
       "jsx": "react",
       "outDir": "./dist",
       "moduleResolution": "Node",
-      "types": ["@types/chrome"]
+      "types": ["@types/chrome"],
     },
-    "include": ["src/**/*.{tsx,ts}", "plugin/**/*.{tsx,ts}"],
+    "include": ["src/**/*.{tsx,ts}"],
     "exclude": ["node_modules"]
   }
-  
