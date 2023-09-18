@@ -1,25 +1,29 @@
-const fs = require("fs");
-const copy = require("rollup-plugin-copy");
-const zip = require("rollup-plugin-zip");
-const clear = require("rollup-plugin-clear");
-const terser = require("@rollup/plugin-terser");
-const typescript = require("@rollup/plugin-typescript");
-const commonjs = require("@rollup/plugin-commonjs");
-const resolve = require("@rollup/plugin-node-resolve");
-const babel = require("@rollup/plugin-babel");
-const html = require("@rollup/plugin-html");
-const replace = require("@rollup/plugin-replace");
-const postcss = require("rollup-plugin-postcss");
-const { generateHtmlPlugin } = require("./plugin/html.ts");
+import fs from "fs";
+import copy from "rollup-plugin-copy";
+import zip from "rollup-plugin-zip";
+import clear from "rollup-plugin-clear";
+import terser from "@rollup/plugin-terser";
+import typescript from "@rollup/plugin-typescript";
+import commonjs from "@rollup/plugin-commonjs";
+import resolve from "@rollup/plugin-node-resolve";
+import babel from "@rollup/plugin-babel";
+import html from "@rollup/plugin-html";
+import replace from "@rollup/plugin-replace";
+import postcss from "rollup-plugin-postcss";
+import jsx from "acorn-jsx";
+import { generateHtmlPlugin } from "./plugin/html.js";
+import tailwindcss from "tailwindcss";
 
-const jsx = require("acorn-jsx");
-const { makeHtmlAttributes } = html;
-
-const { getBabelOutputPlugin } = babel;
+// const { makeHtmlAttributes } = html;
+// const { getBabelOutputPlugin } = babel;
 
 /** @type {import('rollup').RollupOptions} */
-module.exports = {
-  input: ["src/popup/popup.tsx", "src/content/content.js"],
+export default {
+  input: [
+    "src/popup/popup.tsx",
+    "src/content/content.js",
+    "src/options/options.tsx",
+  ],
   acornInjectPlugins: [jsx()],
   output: {
     dir: "dist",
@@ -58,7 +62,7 @@ module.exports = {
     postcss({
       // extract: true,
       // inject: true,
-      plugins: [require("tailwindcss")],
+      plugins: [tailwindcss],
     }),
     // zip({
     //   dir: "./",

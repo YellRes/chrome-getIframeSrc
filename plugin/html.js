@@ -1,10 +1,10 @@
 import { makeHtmlAttributes } from "@rollup/plugin-html";
 
-export const generateHtmlPlugin = (htmlName: string) => {
+export const generateHtmlPlugin = (htmlName) => {
   return {
     fileName: `${htmlName}.html`,
     template: ({ attributes, files, publicPath, title }) => {
-      let scripts: any = [
+      let scripts = [
         ...(files.js || []).filter((item) => item.name === htmlName),
       ];
       scripts = scripts
