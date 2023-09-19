@@ -8,6 +8,6 @@
       "moduleResolution": "Node",
       "types": ["@types/chrome"],
     },
-    "include": ["src/**/*.{tsx,ts}"],
+    "include": ["src/**/*"],
     "exclude": ["node_modules"]
   }
