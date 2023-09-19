@@ -49,8 +49,8 @@ export default {
       babelHelpers: "bundled",
       extensions: [".js", ".jsx", ".es6", ".es", ".mjs", ".ts", ".tsx"],
     }),
-    generateHtmlPlugin("popup"),
-    generateHtmlPlugin("options"),
+    html(generateHtmlPlugin("popup")),
+    html(generateHtmlPlugin("options")),
     // 替换掉react源码中的 process.env
     replace({
       "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),

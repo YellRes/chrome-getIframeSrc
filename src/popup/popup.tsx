@@ -1,5 +1,5 @@
 import { createRoot } from 'react-dom/client'
-import React, { useState， useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { toast, ToastContainer } from 'react-toastify'
 import { copy, checkLocalServer } from '../util'
 import './index.css'
@@ -27,7 +27,7 @@ function App() {
             const currentTabId = tabs[0].id;
             // 当前tab发送事件
             chrome.tabs.sendMessage(currentTabId, "", (res) => {
-                setIframeArr(res)
+                setIframeArr(res || [])
             });
         });
         
