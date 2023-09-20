@@ -38,6 +38,7 @@ export default {
     manualChunks: {
       react: ["react"],
       "react-dom": ["react-dom"],
+      antd: ["antd"],
     },
   },
   plugins: [
@@ -49,8 +50,8 @@ export default {
       babelHelpers: "bundled",
       extensions: [".js", ".jsx", ".es6", ".es", ".mjs", ".ts", ".tsx"],
     }),
-    html(generateHtmlPlugin("popup")),
-    html(generateHtmlPlugin("options")),
+    html({ ...generateHtmlPlugin("popup"), title: "allIframe" }),
+    html({ ...generateHtmlPlugin("options"), title: "allIframe配置页面" }),
     // 替换掉react源码中的 process.env
     replace({
       "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
@@ -73,5 +74,14 @@ export default {
     // }),
     process.env.NODE_ENV === "production" ? terser() : "",
   ],
+  onwarn(warning, warn) {
+    if (
+      warning.code === "MODULE_LEVEL_DIRECTIVE" ||
+      warning.message.includes(`'use client'`)
+    ) {
+      return;
+    }
+    warn(warning);
+  },
   // external: ["react"],
 };
