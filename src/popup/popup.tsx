@@ -55,10 +55,20 @@ function App() {
         }
     }
 
+    // 去设置
+    const toSetting = () => { 
+        if (chrome.runtime.openOptionsPage) {
+            chrome.runtime.openOptionsPage();
+        } else {
+        window.open(chrome.runtime.getURL('options.html'));
+        }
+    }
+
     return <div className="w-[300px] h-[400px] p-2 font-mono text-lg text-center font-semibold">
-        <div className="relative text-right pd-4">
+        <div className="relative text-right pd-4 flex justify-between">
+            <button onClick={refreshAllIframe} className="btn-primary-round">刷新</button>
+            <button className="btn-primary-round" onClick={ toSetting}>设置</button>
             <span className="absolute left-[50%] translate-x-[-50%] ">iframe标签</span>
-            <button onClick={refreshAllIframe} className=" bg-slate-900 hover:bg-slate-700 focus:outline-none focus:ring-2 px-2.5 py-1 text-sm leading-5 rounded-full text-white">刷新</button>
         </div>
 
         <div id="iframe-container" className="overflow-auto mt-1">
@@ -67,7 +77,7 @@ function App() {
                 return <div className="iframe-item text-left m-2" key={index}>
                     <div className="text-sm">{item.name}
                         <button onClick={ () => toLocalServer(item)} disabled={item.disabled} className="btn-primary">跳转</button>
-                        <button onClick={() => copyUrl(item.src)} className="btn-primary ">复制</button>
+                        <button onClick={() => copyUrl(item.src)} className="btn-primary">复制</button>
                     </div>
                 </div>
             }): null
