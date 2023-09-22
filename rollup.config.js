@@ -51,6 +51,13 @@ export default {
       presets: ["@babel/preset-react"],
       babelHelpers: "bundled",
       extensions: [".js", ".jsx", ".es6", ".es", ".mjs", ".ts", ".tsx"],
+      plugins: [
+        [
+          "import",
+          { libraryName: "antd", libraryDirectory: "lib", style: true },
+          "antd",
+        ],
+      ],
     }),
     html({ ...generateHtmlPlugin("popup"), title: "allIframe" }),
     html({ ...generateHtmlPlugin("options"), title: "allIframe配置页面" }),
