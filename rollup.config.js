@@ -16,6 +16,8 @@ import tailwindcss from "tailwindcss";
 
 // const { makeHtmlAttributes } = html;
 // const { getBabelOutputPlugin } = babel;
+// TODO: antd 打包出来过大 有2MB 能否优化
+// TODO: options.html 每次要手动刷新才能加载页面 能否自动刷新
 
 /** @type {import('rollup').RollupOptions} */
 export default {
