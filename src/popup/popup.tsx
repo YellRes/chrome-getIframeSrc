@@ -30,8 +30,6 @@ function App() {
                 setIframeArr(res || [])
             });
         });
-        
-       
     }
 
     useEffect(refreshAllIframe, [])
