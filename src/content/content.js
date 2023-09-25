@@ -1,6 +1,3 @@
-/**
- * TODO: 做成配置页面
- */
 const TEST_BOSS_VIEW = "http://101.37.228.6:88";
 const PRD_BOSS_VIEW = "https://sso-boss-extend.greatld.com";
 const TEST_BOSS_VIEW_V3 = "http://101.37.228.6:96";
@@ -16,7 +13,7 @@ const MATCH_PRE_HTTP = [
   TEST_BOSS_VIEW,
 ];
 
-const WEBSITE_LOCAL_PORT = {
+let WEBSITE_LOCAL_PORT = {
   [TEST_BOSS_VIEW]: LOCAL_BOSS_VIEW,
   [PRD_BOSS_VIEW]: LOCAL_BOSS_VIEW,
   [TEST_BOSS_VIEW_V3]: LOCAL_BOSS_VIEW_V3,

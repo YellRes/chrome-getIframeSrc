@@ -27,15 +27,11 @@ export default {
     "src/options/options.tsx",
   ],
   acornInjectPlugins: [jsx()],
+  // content.js 里面不能使用es模块 iife
   output: {
     dir: "dist",
     entryFileNames: "[name].js",
     format: "es",
-    plugins: [
-      // getBabelOutputPlugin({
-      //   presets: ["@babel/preset-env"],
-      // }),
-    ],
     // 手动拆包 react react-dom
     manualChunks: {
       react: ["react"],
@@ -51,13 +47,7 @@ export default {
       presets: ["@babel/preset-react"],
       babelHelpers: "bundled",
       extensions: [".js", ".jsx", ".es6", ".es", ".mjs", ".ts", ".tsx"],
-      plugins: [
-        [
-          "import",
-          { libraryName: "antd", libraryDirectory: "lib", style: true },
-          "antd",
-        ],
-      ],
+      plugins: [],
     }),
     html({ ...generateHtmlPlugin("popup"), title: "allIframe" }),
     html({ ...generateHtmlPlugin("options"), title: "allIframe配置页面" }),
