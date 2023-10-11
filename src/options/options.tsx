@@ -159,7 +159,6 @@ function App() {
     const [dataSource, setDataSource] = useState<Array<IServerItem>>([])
     async function fetchData() { 
         let res = await getAllStorage()
-        console.log(res?.urlArr, 'res?.urlArr')
 
         setDataSource(res?.urlArr || [])
     }

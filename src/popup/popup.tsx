@@ -25,6 +25,7 @@ function App() {
          */
         chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
             const currentTabId = tabs[0].id;
+            if (!currentTabId) return
             // 当前tab发送事件
             chrome.tabs.sendMessage(currentTabId, "", (res) => {
                 setIframeArr(res || [])
