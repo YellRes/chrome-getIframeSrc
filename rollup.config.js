@@ -11,6 +11,9 @@ import html from "@rollup/plugin-html";
 import replace from "@rollup/plugin-replace";
 import postcss from "rollup-plugin-postcss";
 import jsx from "acorn-jsx";
+// import dev from "rollup-plugin-dev";
+import serve from "rollup-plugin-serve";
+import livereload from "rollup-plugin-livereload";
 import { generateHtmlPlugin } from "./plugin/html.js";
 import tailwindcss from "tailwindcss";
 
@@ -64,6 +67,18 @@ export default {
       // inject: true,
       plugins: [tailwindcss],
     }),
+    serve({
+      contentBase: "dist",
+      host: "localhost",
+    }),
+    // Q: 插入的文件 在chrome 报错
+    livereload({
+      watch: "dist",
+      port: "",
+      // host: "localhost",
+      clientUrl: "http://localhost:35729/livereload.js?snipver=1",
+    }),
+    // dev(),
     // zip({
     //   dir: "./",
     // }),
