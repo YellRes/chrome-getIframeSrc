@@ -7,6 +7,7 @@ export const generateHtmlPlugin = (htmlName) => {
       let scripts = [
         ...(files.js || []).filter((item) => item.name === htmlName),
       ];
+
       scripts = scripts
         .map(({ fileName }) => {
           const attrs = makeHtmlAttributes(attributes.script);
@@ -17,6 +18,7 @@ export const generateHtmlPlugin = (htmlName) => {
           <html>
             <head>
               <title>${title}</title>
+              <link rel="stylesheet" type="text/css" href="./bundle.css"/>
             </head>
             <body>
               <div id="app"></div>

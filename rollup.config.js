@@ -63,29 +63,29 @@ export default {
     }),
     // TODO: 能否提取出js中的css内容
     postcss({
-      // extract: true,
+      extract: "bundle.css",
       // inject: true,
       plugins: [tailwindcss],
     }),
-    serve({
-      contentBase: "dist",
-      host: "localhost",
-    }),
-    // Q: 插入的文件 在chrome 报错
-    livereload({
-      watch: "dist",
-      port: "",
-      // host: "localhost",
-      clientUrl: "http://localhost:35729/livereload.js?snipver=1",
-    }),
+    // serve({
+    //   contentBase: "dist",
+    //   host: "localhost",
+    // }),
+    // // Q: 插入的文件 在chrome 报错
+    // livereload({
+    //   watch: "dist",
+    //   port: "",
+    //   // host: "localhost",
+    //   clientUrl: "http://localhost:35729/livereload.js?snipver=1",
+    // }),
     // dev(),
     // zip({
     //   dir: "./",
     // }),
-    // clear({
-    //   targets: ["./dist"],
-    //   watch: true,
-    // }),
+    clear({
+      targets: ["./dist"],
+      watch: true,
+    }),
     process.env.NODE_ENV === "production" ? terser() : "",
   ],
   onwarn(warning, warn) {
